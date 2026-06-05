@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/05 13:04:53 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:10:56 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void ScalarConverter::tochar(std::string input)
 		std::cout << "char: impossible" << std::endl;
 		return;
 	}
-	if (!std::isprint(std::strtod(input.c_str(), NULL)))
+	if (!std::isprint(input[0] - '0'))
 	{
 		std::cout << "char: non displayable" << std::endl;
 		return;
@@ -72,15 +72,14 @@ void ScalarConverter::tochar(std::string input)
 	std::cout << "char: " << static_cast<char>(input[0]) << std::endl;
 }
 
+void ScalarConverter::toint(std::string input)
+{
+	
+}
+
 void ScalarConverter::convert(std::string input)
 {
 	ScalarConverter::tochar(input);
-	//		convert input to double
-	//		if more than 127 impossible
-	//		if >31 && <127 
-	//			static cast to char
-	//			print char
-	//		else: non displayable
 	// toint
 	//		parse: if more than 1 char, impossible
 	//		convert input to double
