@@ -36,11 +36,14 @@ void ScalarConverter::tochar(std::string input)
 	size_t len = input.length();
 	int res = 0;
 	int sign = 1;
-	if (input[0] == '-')
-		sign *= -1;
 	for(size_t i = 0; i < len; i++)
 	{
-		if (input[i] >= '0' && input[i] <= '9')
+		if (i == 0 && input[i] == '-')
+		{
+			++i;
+			sign *= -1;
+		}
+		if (isdigit(input[i]))
 			res = res * 10 + (input[i] - '0');
 	}
 	if (res != 0)
@@ -64,7 +67,7 @@ void ScalarConverter::tochar(std::string input)
 		std::cout << "char: impossible" << std::endl;
 		return;
 	}
-	if (!std::isprint(input[0] - '0'))
+	if (!std::isprint(static_cast<int>(input[0])))
 	{
 		std::cout << "char: non displayable" << std::endl;
 		return;
@@ -74,13 +77,41 @@ void ScalarConverter::tochar(std::string input)
 
 void ScalarConverter::toint(std::string input)
 {
-	
+	size_t len = input.length();
+	unsigned long long res= 0;
+	int sign = 1;
+	for (size_t i = 0; i < len; i++)
+	{
+		if (i == 0 && input[i] == '-' && len > 1)
+		{
+			++i;
+			sign *= -1;
+		}
+		if (len > 1 && isalpha(input[i]))
+		{
+			std::cout << "int: impossible" << std::endl;
+			return;
+		}
+		if (isdigit(input[i]))
+			res = res * 10 + (static_cast<int>(input[i]) - '0');
+		else
+			res = static_cast<int>(input[i]);
+	}
+	if (res > INT_MAX)
+	{
+		std::cout << "int: impossible" << std::endl;
+		return;
+	}
+	std::cout << "int: ";
+	if (sign == -1)
+		std::cout << "-";	
+	std::cout << res << std::endl;
 }
 
 void ScalarConverter::convert(std::string input)
 {
 	ScalarConverter::tochar(input);
-	// toint
+	ScalarConverter::toint(input);
 	//		parse: if more than 1 char, impossible
 	//		convert input to double
 	//		if <INT_MIN or >INT_MAX impossible
