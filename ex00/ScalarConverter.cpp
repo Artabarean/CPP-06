@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/05 15:10:56 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/11 12:20:20 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,35 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 	return (*this);
 }
 
+bool ScalarConverter::checkdecimal(std::string input, size_t start)
+{
+	for(size_t i = (1 + start); i < input.length(); i++)
+	{
+		if ((!isdigit(input[i]) && (1 + i) < input.length()) || (!isdigit(input[i]) && input[i] != 'f'))
+		{
+			return(false);
+		}
+	}
+	return(true);
+}
+
 void ScalarConverter::tochar(std::string input)
 {
 	size_t start = input.find(".");
+	if (start != std::string::npos)
+	{
+		if (checkdecimal(input, start) == false)
+		{
+			std::cout << "char: impossible" << std::endl;
+			return;
+		}
+	}
 	size_t end = input.length() - start;
 	if (start != std::string::npos)
 		input.erase(start, end);
 	size_t len = input.length();
 	int res = 0;
 	int sign = 1;
-	std::cout << input << std::endl;
 	for(size_t i = 0; i < len; i++)
 	{
 		if (i == 0 && input[i] == '-')
@@ -83,6 +102,14 @@ void ScalarConverter::tochar(std::string input)
 void ScalarConverter::toint(std::string input)
 {
 	size_t start = input.find(".");
+	if (start != std::string::npos)
+	{
+		if (checkdecimal(input, start) == false)
+		{
+			std::cout << "int: impossible" << std::endl;
+			return;
+		}
+	}
 	size_t end = input.length() - start;
 	if (start != std::string::npos)
 		input.erase(start, end);
@@ -126,8 +153,20 @@ void ScalarConverter::tofloat(std::string input)
 		std::cout << "float: " << input << std::endl;
 		return;
 	}
+	size_t start = input.find(".");
+	if (start != std::string::npos)
+	{
+		if (checkdecimal(input, start) == false)
+		{
+			std::cout << "float: impossible" << std::endl;
+			return;
+		}
+	}
+	size_t end = input.length() - start;
+	if (start != std::string::npos)
+		input.erase(start, end);
 	size_t len = input.length();
-	unsigned long long res= 0;
+	double res = 0;
 	int sign = 1;
 	for (size_t i = 0; i < len; i++)
 	{
@@ -146,12 +185,61 @@ void ScalarConverter::tofloat(std::string input)
 		else
 			res = static_cast<int>(input[i]);
 	}
+	if (sign == -1)
+		res *= sign;
+	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(res) << 'f' << std::endl;
+}
+
+void ScalarConverter::todouble(std::string input)
+{
+	if (input == "nan" || input == "nanf" || input == "+inff" || input == "+inf" || input == "-inff" || input == "-inf")
+	{
+		if (input != "nan" && input != "+inf" &&input != "-inf")
+			input.erase(input.length() - 1, input.length());
+		std::cout << "double: " << input << std::endl;
+		return;
+	}
+	size_t start = input.find(".");
+	if (start != std::string::npos)
+	{
+		if (checkdecimal(input, start) == false)
+		{
+			std::cout << "duble: impossible" << std::endl;
+			return;
+		}
+	}
+	size_t end = input.length() - start;
+	if (start != std::string::npos)
+		input.erase(start, end);
+	size_t len = input.length();
+	double res = 0;
+	int sign = 1;
+	for (size_t i = 0; i < len; i++)
+	{
+		if (i == 0 && input[i] == '-' && len > 1)
+		{
+			++i;
+			sign *= -1;
+		}
+		if (isalpha(input[i]) && (len - 1) > i)
+		{
+			std::cout << "double: impossible" << std::endl;
+			return;
+		}
+		if (isdigit(input[i]))
+			res = res * 10 + (static_cast<double>(input[i]) - '0');
+		else
+			res = static_cast<double>(input[i]);
+	}
+	if (sign == -1)
+		res *= sign;
+	std::cout << "double: " << std::fixed << std::setprecision(1) << res << std::endl;
 }
 
 void ScalarConverter::convert(std::string input)
 {
-	ScalarConverter::tochar(input);
-	ScalarConverter::toint(input);
-	ScalarConverter::tofloat(input);
-	// todouble
+	tochar(input);
+	toint(input);
+	tofloat(input);
+	todouble(input);
 }
