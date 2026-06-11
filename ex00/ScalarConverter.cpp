@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/11 12:20:20 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/11 13:03:18 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,32 +162,10 @@ void ScalarConverter::tofloat(std::string input)
 			return;
 		}
 	}
-	size_t end = input.length() - start;
-	if (start != std::string::npos)
-		input.erase(start, end);
-	size_t len = input.length();
-	double res = 0;
-	int sign = 1;
-	for (size_t i = 0; i < len; i++)
-	{
-		if (i == 0 && input[i] == '-' && len > 1)
-		{
-			++i;
-			sign *= -1;
-		}
-		if (isalpha(input[i]) && (len - 1) > i)
-		{
-			std::cout << "float: impossible" << std::endl;
-			return;
-		}
-		if (isdigit(input[i]))
-			res = res * 10 + (static_cast<int>(input[i]) - '0');
-		else
-			res = static_cast<int>(input[i]);
-	}
-	if (sign == -1)
-		res *= sign;
-	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(res) << 'f' << std::endl;
+	double value;
+	char *endptr = NULL;
+	value = std::strtod(input.c_str(), &endptr);
+	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(value) << 'f' << std::endl;
 }
 
 void ScalarConverter::todouble(std::string input)
@@ -204,36 +182,14 @@ void ScalarConverter::todouble(std::string input)
 	{
 		if (checkdecimal(input, start) == false)
 		{
-			std::cout << "duble: impossible" << std::endl;
-			return;
-		}
-	}
-	size_t end = input.length() - start;
-	if (start != std::string::npos)
-		input.erase(start, end);
-	size_t len = input.length();
-	double res = 0;
-	int sign = 1;
-	for (size_t i = 0; i < len; i++)
-	{
-		if (i == 0 && input[i] == '-' && len > 1)
-		{
-			++i;
-			sign *= -1;
-		}
-		if (isalpha(input[i]) && (len - 1) > i)
-		{
 			std::cout << "double: impossible" << std::endl;
 			return;
 		}
-		if (isdigit(input[i]))
-			res = res * 10 + (static_cast<double>(input[i]) - '0');
-		else
-			res = static_cast<double>(input[i]);
 	}
-	if (sign == -1)
-		res *= sign;
-	std::cout << "double: " << std::fixed << std::setprecision(1) << res << std::endl;
+	double value;
+	char *endptr = NULL;
+	value = std::strtod(input.c_str(), &endptr);
+	std::cout << "double: " << std::fixed << std::setprecision(1) << value << std::endl;
 }
 
 void ScalarConverter::convert(std::string input)
