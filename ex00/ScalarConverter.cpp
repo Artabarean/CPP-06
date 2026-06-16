@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/15 11:00:30 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/16 10:33:03 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,11 @@ void ScalarConverter::tofloat(std::string input)
 	double value;
 	char *endptr = NULL;
 	value = std::strtod(input.c_str(), &endptr);
+	if (errno == ERANGE)
+	{
+		std::cout << "double: impossible" << std::endl;
+		return;
+	}
 	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(value) << 'f' << std::endl;
 }
 
@@ -236,6 +241,11 @@ void ScalarConverter::todouble(std::string input)
 	double value;
 	char *endptr = NULL;
 	value = std::strtod(input.c_str(), &endptr);
+	if (errno == ERANGE)
+	{
+		std::cout << "double: impossible" << std::endl;
+		return;
+	}
 	std::cout << "double: " << std::fixed << std::setprecision(1) << value << std::endl;
 }
 
