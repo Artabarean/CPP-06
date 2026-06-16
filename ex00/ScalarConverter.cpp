@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/16 11:34:04 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/16 12:46:51 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool ScalarConverter::checkdecimal(std::string input, size_t start)
 {
 	if ((1 + start) == input.length())
 		return(false);
-	for(size_t i = (1 + start); i < input.length(); i++)
+	for(size_t i = (1 + start); i < input.length(); ++i)
 	{
 		if ((!isdigit(input[i]) && (1 + i) < input.length()) || (!isdigit(input[i]) && input[i] != 'f'))
 		{
@@ -60,9 +60,10 @@ void ScalarConverter::tochar(std::string input)
 	size_t end = len - start;
 	if (start != std::string::npos)
 		input.erase(start, end);
+	len = input.length();
 	int res = 0;
 	int sign = 1;
-	for(size_t i = 0; i < len; i++)
+	for(size_t i = 0; i < len; ++i)
 	{
 		if (i == 0 && input[i] == '-')
 		{
@@ -121,9 +122,10 @@ void ScalarConverter::toint(std::string input)
 	size_t end = len - start;
 	if (start != std::string::npos)
 		input.erase(start, end);
-	unsigned long long res= 0;
+	len = input.length();
+	unsigned long long res = 0;
 	int sign = 1;
-	for (size_t i = 0; i < len; i++)
+	for (size_t i = 0; i < len; ++i)
 	{
 		if (i == 0 && input[i] == '-' && len > 1)
 		{
@@ -163,7 +165,7 @@ void ScalarConverter::tofloat(std::string input)
 	size_t start = input.find(".");
 	if (start != std::string::npos)
 	{
-		for (size_t i = 0; i < start; i++)
+		for (size_t i = 0; i < start; ++i)
 		{
 			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
 			{
@@ -180,7 +182,7 @@ void ScalarConverter::tofloat(std::string input)
 	else
 	{
 		size_t len = input.length();
-		for (size_t i = 0; i < len; i++)
+		for (size_t i = 0; i < len; ++i)
 		{
 			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
 			{
@@ -212,7 +214,7 @@ void ScalarConverter::todouble(std::string input)
 	size_t start = input.find(".");
 	if (start != std::string::npos)
 	{
-		for (size_t i = 0; i < start; i++)
+		for (size_t i = 0; i < start; ++i)
 		{
 			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
 			{
@@ -229,7 +231,7 @@ void ScalarConverter::todouble(std::string input)
 	else
 	{
 		size_t len = input.length();
-		for (size_t i = 0; i < len; i++)
+		for (size_t i = 0; i < len; ++i)
 		{
 			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
 			{
