@@ -5,18 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/06/04 11:06:25 by atabarea          #+#    #+#              #
-#    Updated: 2026/06/16 11:44:27 by atabarea         ###   ########.fr        #
+#    Created: 2026/06/16 11:44:16 by atabarea          #+#    #+#              #
+#    Updated: 2026/06/16 11:45:14 by atabarea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= Serializer
+NAME		= Real_type
 CXX			= c++
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 SRC		= \
 	main.cpp \
-	Serializer.cpp
+	.cpp \
 
 OBJS	= $(SRC:.cpp=.o)
 

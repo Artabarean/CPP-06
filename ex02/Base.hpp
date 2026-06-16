@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/15 12:17:01 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/16 11:31:28 by atabarea         ###   ########.fr       */
+/*   Created: 2026/06/16 11:45:29 by atabarea          #+#    #+#             */
+/*   Updated: 2026/06/16 11:49:17 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
-
-int main(void)
-{
-	Data shawarma;
-	shawarma.number = 3;
-	shawarma.phrase = "pollo";
-	uintptr_t res = Serializer::serialize(&shawarma);
-	std::cout << shawarma.number << std::endl;
-	std::cout << shawarma.phrase << std::endl;
-	Data *minero;
-	minero = Serializer::deserialize(res);
-	std::cout << minero->number << std::endl;
-	std::cout << minero->phrase << std::endl;
-	return(0);
-}
+#include <iostream>
