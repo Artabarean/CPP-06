@@ -6,13 +6,14 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 11:31:48 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/16 11:24:56 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/17 14:23:50 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include <iostream>
 #include <string>
-#include <stdint.h>
+#include <cstdint>
 #include "Data.hpp"
 
 class Serializer

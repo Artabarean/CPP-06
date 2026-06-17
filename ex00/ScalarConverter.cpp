@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/16 12:46:51 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:06:04 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,24 @@ bool ScalarConverter::checkdecimal(std::string input, size_t start)
 
 void ScalarConverter::tochar(std::string input)
 {
+	if (input.empty())
+	{
+		std::cout << "char: impossible" << std::endl;
+		return;
+	}
 	size_t start = input.find(".");
 	if (start != std::string::npos)
 	{
+		for (size_t i = 0; i < start; ++i)
+		{
+			if (i == 0 && input[i] == '-')
+				++i;
+			if (!isdigit(input[i]) || (input[i] == '-' && 1 + i == start))
+			{
+				std::cout << "char: impossible" << std::endl;
+				return;
+			}
+		}
 		if (checkdecimal(input, start) == false)
 		{
 			std::cout << "char: impossible" << std::endl;
@@ -109,9 +124,24 @@ void ScalarConverter::tochar(std::string input)
 
 void ScalarConverter::toint(std::string input)
 {
+	if (input.empty())
+	{
+		std::cout << "int: impossible" << std::endl;
+		return;
+	}
 	size_t start = input.find(".");
 	if (start != std::string::npos)
 	{
+		for (size_t i = 0; i < start; ++i)
+		{
+			if (i == 0 && input[i] == '-')
+				++i;
+			if (!isdigit(input[i]) || (input[i] == '-' && 1 + i == start))
+			{
+				std::cout << "int: impossible" << std::endl;
+				return;
+			}
+		}
 		if (checkdecimal(input, start) == false)
 		{
 			std::cout << "int: impossible" << std::endl;
@@ -123,7 +153,7 @@ void ScalarConverter::toint(std::string input)
 	if (start != std::string::npos)
 		input.erase(start, end);
 	len = input.length();
-	unsigned long long res = 0;
+	double num = 0;
 	int sign = 1;
 	for (size_t i = 0; i < len; ++i)
 	{
@@ -138,23 +168,29 @@ void ScalarConverter::toint(std::string input)
 			return;
 		}
 		if (isdigit(input[i]))
-			res = res * 10 + (static_cast<int>(input[i]) - '0');
+			num = num * 10 + (static_cast<int>(input[i]) - '0');
 		else
-			res = static_cast<int>(input[i]);
+			num = static_cast<int>(input[i]);
 	}
-	if (res > INT_MAX)
+	if (sign == -1)
+		num *= sign;	
+	if (num > INT_MAX || num < INT_MIN)
 	{
 		std::cout << "int: impossible" << std::endl;
 		return;
 	}
+	int res = static_cast<double>(num);
 	std::cout << "int: ";
-	if (sign == -1)
-		std::cout << "-";	
 	std::cout << res << std::endl;
 }
 
 void ScalarConverter::tofloat(std::string input)
 {
+	if (input.empty())
+	{
+		std::cout << "float: impossible" << std::endl;
+		return;
+	}
 	if (input == "nan" || input == "nanf" || input == "+inff" || input == "+inf" || input == "-inff" || input == "-inf")
 	{
 		if (input != "nanf" && input != "+inff" &&input != "-inff")
@@ -167,7 +203,9 @@ void ScalarConverter::tofloat(std::string input)
 	{
 		for (size_t i = 0; i < start; ++i)
 		{
-			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
+			if (i == 0 && input[i] == '-')
+				++i;
+			if (!isdigit(input[i]) || (input[i] == '-' && 1 + i == start))
 			{
 				std::cout << "float: impossible" << std::endl;
 				return;
@@ -184,7 +222,9 @@ void ScalarConverter::tofloat(std::string input)
 		size_t len = input.length();
 		for (size_t i = 0; i < len; ++i)
 		{
-			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
+			if (i == 0 && input[i] == '-')
+				++i;
+			if (!isdigit(input[i]) || (input[i] == '-' && 1 + i == len))
 			{
 				std::cout << "float: impossible" << std::endl;
 				return;
@@ -196,7 +236,7 @@ void ScalarConverter::tofloat(std::string input)
 	value = std::strtod(input.c_str(), &endptr);
 	if (errno == ERANGE)
 	{
-		std::cout << "double: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
 		return;
 	}
 	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(value) << 'f' << std::endl;
@@ -204,6 +244,11 @@ void ScalarConverter::tofloat(std::string input)
 
 void ScalarConverter::todouble(std::string input)
 {
+	if (input.empty())
+	{
+		std::cout << "double: impossible" << std::endl;
+		return;
+	}
 	if (input == "nan" || input == "nanf" || input == "+inff" || input == "+inf" || input == "-inff" || input == "-inf")
 	{
 		if (input != "nan" && input != "+inf" &&input != "-inf")
@@ -216,7 +261,9 @@ void ScalarConverter::todouble(std::string input)
 	{
 		for (size_t i = 0; i < start; ++i)
 		{
-			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
+			if (i == 0 && input[i] == '-')
+				++i;
+			if (!isdigit(input[i]) || (input[i] == '-' && 1 + i == start))
 			{
 				std::cout << "double: impossible" << std::endl;
 				return;
@@ -233,7 +280,9 @@ void ScalarConverter::todouble(std::string input)
 		size_t len = input.length();
 		for (size_t i = 0; i < len; ++i)
 		{
-			if ((i == 0 && input[i] != '-' && !isdigit(input[i])) || !isdigit(input[i]))
+			if (i == 0 && input[i] == '-')
+				++i;
+			if (!isdigit(input[i]) || (input[i] == '-' && 1 + i == len))
 			{
 				std::cout << "double: impossible" << std::endl;
 				return;

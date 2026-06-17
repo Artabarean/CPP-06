@@ -6,17 +6,18 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 10:55:10 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/16 11:33:25 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/17 14:23:35 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include <string>
 #include <iostream>
 #include <cstdlib>
 #include <cctype>
 #include <climits>
 #include <stdexcept>
-#include <errno.h>
+#include <cerrno>
 #include <iomanip>
 
 class ScalarConverter

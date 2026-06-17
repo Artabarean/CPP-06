@@ -6,12 +6,15 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 12:16:52 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/16 12:39:54 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/17 14:24:03 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include "Base.hpp"
 
 class B : public Base
 {
+	B(void);
+	~B(void);
 };
