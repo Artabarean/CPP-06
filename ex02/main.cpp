@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   A.hpp                                              :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/16 12:16:53 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/17 14:46:42 by atabarea         ###   ########.fr       */
+/*   Created: 2026/06/17 14:33:33 by atabarea          #+#    #+#             */
+/*   Updated: 2026/06/17 15:08:02 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
 #include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
-class A : public Base
+int main(void)
 {
-	public:
-		A(void);
-		~A(void);
-};
+	Base *ptr_random = Base::generate();
+	Base::identify(ptr_random);
+	Base &ref_random = *ptr_random;
+	Base::identify(ref_random);
+	return (0);
+}

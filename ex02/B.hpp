@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 12:16:52 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/17 14:24:03 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/17 14:46:49 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 class B : public Base
 {
-	B(void);
-	~B(void);
+	public:
+		B(void);
+		~B(void);
 };

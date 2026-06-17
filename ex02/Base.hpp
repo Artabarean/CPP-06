@@ -6,19 +6,21 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 11:45:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/17 14:23:25 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/17 15:13:32 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <exception>
 
 class Base
 {
 	public:
-		Base(void);
 		virtual ~Base(void);
-		Base * generate(void);
-		void identify(Base* p);
-		void identify(Base& p);
+		static Base * generate(void);
+		static void identify(Base* p);
+		static void identify(Base& p);
 };
