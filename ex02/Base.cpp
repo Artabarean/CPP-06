@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 11:45:31 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/17 15:18:14 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/18 10:57:35 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ Base::~Base(void)
 
 Base *Base::generate(void)
 {
-	std::srand(static_cast<unsigned int>(std::time(NULL)));
 	int num = std::rand();
 	num %= 3;
 	if(num == 0)
