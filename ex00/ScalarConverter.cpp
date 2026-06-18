@@ -6,7 +6,7 @@
 /*   By: atabarea <atabarea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 11:35:29 by atabarea          #+#    #+#             */
-/*   Updated: 2026/06/17 11:06:04 by atabarea         ###   ########.fr       */
+/*   Updated: 2026/06/18 10:25:06 by atabarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void ScalarConverter::tochar(std::string input)
 			sign *= -1;
 		}
 		if (isdigit(input[i]))
-			res = res * 10 + (input[i] - '0');
+			res = res * 10 + (static_cast<int>(input[i]) - '0');
 		else if (len > 1 && !isdigit(input[i]))
 		{
 			std::cout << "char: impossible" << std::endl;
